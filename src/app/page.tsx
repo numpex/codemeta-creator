@@ -1,0 +1,165 @@
+"use client";
+
+import { License, PackageDescription, stringList } from '@/lib/types';
+import { useCallback, useMemo, useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import CssBaseline from '@mui/material/CssBaseline';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { DefaultPackage } from '@/lib/packages';
+import Grid from '@mui/material/Unstable_Grid2';
+import Help from '@/components/Help';
+import IconButton from '@mui/material/IconButton';
+import LicenseInput from '@/components/inputs/LicenseInput';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import ListInput from '@/components/inputs/ListInput';
+import Render from '@/components/Render';
+import Stack from '@mui/material/Stack';
+import TextInput from '@/components/inputs/TextInput';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+
+import createTheme from '@mui/material/styles/createTheme';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+export default function Home() {
+  const [name, setName] = useState<string>(DefaultPackage.name);
+  const [version, setVersion] = useState<string>(DefaultPackage.version);
+  const [license, setLicense] = useState<License>(DefaultPackage.license);
+  const [description, setDescription] = useState<string>(DefaultPackage.description);
+  const [homepage, setHomepage] = useState<string>(DefaultPackage.homepage);
+  const [programmingLanguage, setProgrammingLanguage] = useState<stringList>(DefaultPackage.programmingLanguage);
+  const [operatingSystem, setOperatingSystem] = useState<stringList>(DefaultPackage.operatingSystem);
+  const [keywords, setKeywords] = useState<stringList>(DefaultPackage.keywords);
+  const [codeRepository, setCodeRepository] = useState<string>(DefaultPackage.codeRepository);
+  const [contIntegration, setContIntegration] = useState<string>(DefaultPackage.contIntegration);
+  const [dateCreated, setDateCreated] = useState<string>(DefaultPackage.dateCreated);
+  const [datePublished, setDatePublished] = useState<string>(DefaultPackage.datePublished);
+  const [dateModified, setDateModified] = useState<string>(DefaultPackage.dateModified);
+  const [downloadUrl, setDownloadUrl] = useState<string>(DefaultPackage.downloadUrl);
+  const [issueTracker, setIssueTracker] = useState<string>(DefaultPackage.issueTracker);
+  const [applicationCategory, setApplicationCategory] = useState<string>(DefaultPackage.applicationCategory);
+  const [developmentStatus, setDevelopmentStatus] = useState<string>(DefaultPackage.developmentStatus);
+  const [releaseNotes, setReleaseNotes] = useState<string>(DefaultPackage.releaseNotes);
+  const [documentation, setDocumentation] = useState<string>(DefaultPackage.documentation);
+  const [discussion, setDiscussion] = useState<string>(DefaultPackage.discussion);
+  const [guixPackage, setGuixPackage] = useState<string>(DefaultPackage.guixPackage);
+  const [spackPackage, setSpackPackage] = useState<string>(DefaultPackage.spackPackage);
+
+  const setPackage = useCallback((desc: PackageDescription) => {
+    setName(desc.name);
+    setVersion(desc.version);
+    setLicense(desc.license);
+    setDescription(desc.description);
+    setHomepage(desc.homepage);
+    setProgrammingLanguage(desc.programmingLanguage);
+    setOperatingSystem(desc.operatingSystem);
+    setKeywords(desc.keywords);
+    setCodeRepository(desc.codeRepository);
+    setContIntegration(desc.contIntegration);
+    setDateCreated(desc.dateCreated);
+    setDatePublished(desc.datePublished);
+    setDateModified(desc.dateModified);
+    setDownloadUrl(desc.downloadUrl);
+    setIssueTracker(desc.issueTracker);
+    setApplicationCategory(desc.applicationCategory);
+    setDevelopmentStatus(desc.developmentStatus);
+    setReleaseNotes(desc.releaseNotes);
+    setDiscussion(desc.discussion);
+    setDocumentation(desc.documentation);
+    setGuixPackage(desc.guixPackage);
+    setSpackPackage(desc.spackPackage);
+  }, [
+    setName, setVersion, setLicense,
+    setDescription, setHomepage, setProgrammingLanguage, setOperatingSystem,
+    setKeywords, setCodeRepository, setContIntegration,
+    setDateCreated, setDatePublished, setDateModified,
+    setDownloadUrl, setIssueTracker, setApplicationCategory, setDevelopmentStatus, setReleaseNotes,
+    setDocumentation, setDiscussion, setGuixPackage, setSpackPackage
+  ]);
+
+  const desc: PackageDescription = {
+    name,
+    version,
+    description,
+    homepage,
+    codeRepository,
+    contIntegration,
+    license,
+    programmingLanguage,
+    operatingSystem,
+    keywords,
+    dateCreated,
+    datePublished,
+    dateModified,
+    downloadUrl,
+    issueTracker,
+    applicationCategory,
+    developmentStatus,
+    releaseNotes,
+    discussion,
+    documentation,
+    guixPackage,
+    spackPackage
+  };
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [mode, setMode] = useState<'dark'|'light'>(prefersDarkMode ? 'dark' : 'light');
+  const toggleMode = () => setMode((prev) => prev === 'dark' ? 'light' : 'dark');
+  const theme = useMemo(() => createTheme({ palette: { mode } }), [mode]);
+  const onMd = useMediaQuery(theme.breakpoints.up('md'));
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <Typography variant="h6" component="div">
+            NuMPEX - Write a codemeta.json in a breeze
+          </Typography>
+          <Help />
+          <IconButton color="inherit" onClick={toggleMode}>
+            {mode === 'dark' ? (
+              <LightModeIcon />
+            ) : (
+              <DarkModeIcon />
+            )}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Grid container spacing={2} sx={{m: 1}}>
+        <Grid xs={12} md={6} container direction="column">
+          <Stack direction={onMd ? 'row' : 'column'}>
+	    <TextInput pValue={name} pOnChange={setName} pName="Name"/>
+	    <TextInput pValue={version} pOnChange={setVersion} pName="Version"/>
+            <LicenseInput license={license} setLicense={setLicense} />
+          </Stack>
+          <Stack direction={onMd ? 'row' : 'column'}>
+	    <TextInput pValue={dateCreated} pOnChange={setDateCreated} pName="Date Created"/>
+            <TextInput pValue={datePublished} pOnChange={setDatePublished} pName="Date Published"/>
+	    <TextInput pValue={dateModified} pOnChange={setDateModified} pName="Date Modified"/>
+          </Stack>
+	  <TextInput pValue={description} pOnChange={setDescription} pName="Description"/>
+	  <TextInput pValue={homepage} pOnChange={setHomepage} pName="Homepage"/>
+	  <TextInput pValue={codeRepository} pOnChange={setCodeRepository} pName="Code Repository"/>
+	  <TextInput pValue={contIntegration} pOnChange={setContIntegration} pName="Cont Integration"/>
+	  <TextInput pValue={downloadUrl} pOnChange={setDownloadUrl} pName="Download Url"/>
+	  <TextInput pValue={issueTracker} pOnChange={setIssueTracker} pName="Issue Tracker"/>
+	  <TextInput pValue={applicationCategory} pOnChange={setApplicationCategory} pName="Application Category"/>
+	  <TextInput pValue={developmentStatus} pOnChange={setDevelopmentStatus} pName="Development Status"/>
+	  <TextInput pValue={releaseNotes} pOnChange={setReleaseNotes} pName="Release Notes"/>
+	  <TextInput pValue={documentation} pOnChange={setDocumentation} pName="Documentation"/>
+	  <TextInput pValue={discussion} pOnChange={setDiscussion} pName="Discussion"/>
+	  <TextInput pValue={guixPackage} pOnChange={setGuixPackage} pName="Guix Package"/>
+	  <TextInput pValue={spackPackage} pOnChange={setSpackPackage} pName="Spack Package"/>
+          <ListInput pValue={programmingLanguage} pOnChange={setProgrammingLanguage} pName="Programming Languages"/>
+          <ListInput pValue={operatingSystem} pOnChange={setOperatingSystem} pName="Operating Systems"/>
+          <ListInput pValue={keywords} pOnChange={setKeywords} pName="Keywords"/>
+        </Grid>
+        <Grid xs={12} md={6}>
+          <Render desc={desc} setPackage={setPackage}/>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  )
+}
