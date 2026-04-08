@@ -3,10 +3,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import TextField from '@mui/material/TextField';
 import { stringList } from '@/lib/types';
 
-export default function ListInput({ pValue, pOnChange, pName }: {
+export default function ListInput({ pValue, pOnChange, pName, pHolder }: {
   pValue : stringList,
   pOnChange: any,
   pName : string,
+  pHolder : string,
 }) {
   return (
     <Grid xs={12}>
@@ -22,7 +23,7 @@ export default function ListInput({ pValue, pOnChange, pName }: {
             <TextField
               {...params}
               label={pName}
-              placeholder={'Type and enter'}
+              placeholder={'Type one and enter (' + pHolder + ')'}
             />
           )}}
       />

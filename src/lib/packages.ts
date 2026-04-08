@@ -1,5 +1,5 @@
 import { DefaultLicense } from '@/lib/licenses';
-import { PackageDescription } from "@/lib/types";
+import { PackageDescription, stringList } from "@/lib/types";
 
 export const EmptyPackage: PackageDescription = {
   name: '',
@@ -26,6 +26,8 @@ export const EmptyPackage: PackageDescription = {
   guixPackage: ''
 };
 
+export const DevStatuses: stringList = ["Concept", "WIP", "Suspended", "Abandoned", "Active", "Inactive", "Unsupported", "Moved"];
+
 export const DefaultPackage: PackageDescription = {
   name: "StarPU",
   version: "1.4.12",
@@ -43,7 +45,7 @@ export const DefaultPackage: PackageDescription = {
   downloadUrl: "https://files.inria.fr/starpu/starpu-1.4.11/starpu-1.4.11.tar.gz",
   issueTracker: "https://github.com/starpu-runtime/starpu/issues",
   applicationCategory: "HPC",
-  developmentStatus: "active",
+  developmentStatus: "Active",
   releaseNotes: "https://files.inria.fr/starpu/starpu-1.4.11/log.txt",
   documentation: "https://starpu.gitlabpages.inria.fr/doc.html",
   discussion: "https://discord.gg/vKVJsuHB8U",

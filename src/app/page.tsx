@@ -1,19 +1,20 @@
 "use client";
 
+import { Box, Paper } from "@mui/material";
 import { License, PackageDescription, stringList } from '@/lib/types';
 import { useCallback, useMemo, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { DefaultPackage } from '@/lib/packages';
+import { DefaultPackage, DevStatuses } from '@/lib/packages';
 import Grid from '@mui/material/Unstable_Grid2';
 import Help from '@/components/Help';
 import IconButton from '@mui/material/IconButton';
 import LicenseInput from '@/components/inputs/LicenseInput';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ListInput from '@/components/inputs/ListInput';
+import MenuInput from '@/components/inputs/MenuInput';
 import Render from '@/components/Render';
-import Stack from '@mui/material/Stack';
 import TextInput from '@/components/inputs/TextInput';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import Toolbar from '@mui/material/Toolbar';
@@ -129,32 +130,62 @@ export default function Home() {
       </AppBar>
       <Grid container spacing={2} sx={{m: 1}}>
         <Grid xs={12} md={6} container direction="column">
-          <Stack direction={onMd ? 'row' : 'column'}>
-	    <TextInput pValue={name} pOnChange={setName} pName="Name"/>
-	    <TextInput pValue={version} pOnChange={setVersion} pName="Version"/>
-            <LicenseInput license={license} setLicense={setLicense} />
-          </Stack>
-          <Stack direction={onMd ? 'row' : 'column'}>
-	    <TextInput pValue={dateCreated} pOnChange={setDateCreated} pName="Date Created"/>
-            <TextInput pValue={datePublished} pOnChange={setDatePublished} pName="Date Published"/>
-	    <TextInput pValue={dateModified} pOnChange={setDateModified} pName="Date Modified"/>
-          </Stack>
-	  <TextInput pValue={description} pOnChange={setDescription} pName="Description"/>
-	  <TextInput pValue={homepage} pOnChange={setHomepage} pName="Homepage"/>
-	  <TextInput pValue={codeRepository} pOnChange={setCodeRepository} pName="Code Repository"/>
-	  <TextInput pValue={contIntegration} pOnChange={setContIntegration} pName="Cont Integration"/>
-	  <TextInput pValue={downloadUrl} pOnChange={setDownloadUrl} pName="Download Url"/>
-	  <TextInput pValue={issueTracker} pOnChange={setIssueTracker} pName="Issue Tracker"/>
-	  <TextInput pValue={applicationCategory} pOnChange={setApplicationCategory} pName="Application Category"/>
-	  <TextInput pValue={developmentStatus} pOnChange={setDevelopmentStatus} pName="Development Status"/>
-	  <TextInput pValue={releaseNotes} pOnChange={setReleaseNotes} pName="Release Notes"/>
-	  <TextInput pValue={documentation} pOnChange={setDocumentation} pName="Documentation"/>
-	  <TextInput pValue={discussion} pOnChange={setDiscussion} pName="Discussion"/>
-	  <TextInput pValue={guixPackage} pOnChange={setGuixPackage} pName="Guix Package"/>
-	  <TextInput pValue={spackPackage} pOnChange={setSpackPackage} pName="Spack Package"/>
-          <ListInput pValue={programmingLanguage} pOnChange={setProgrammingLanguage} pName="Programming Languages"/>
-          <ListInput pValue={operatingSystem} pOnChange={setOperatingSystem} pName="Operating Systems"/>
-          <ListInput pValue={keywords} pOnChange={setKeywords} pName="Keywords"/>
+	  <Paper sx={{ p: 2, border: "3px solid", borderColor: "grey.300", borderRadius: 2, boxShadow: 3 }}>
+            <Typography>The software itself</Typography>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+	      <TextInput pValue={homepage} pOnChange={setHomepage} pName="Homepage" pHolder={DefaultPackage.homepage}/>
+	    </Box>
+	    <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={name} pOnChange={setName} pName="Name" pHolder={DefaultPackage.name}/>
+              <LicenseInput license={license} setLicense={setLicense} />
+	    </Box>
+	    <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={description} pOnChange={setDescription} pName="Description" pHolder={DefaultPackage.description}/>
+	      <TextInput pValue={documentation} pOnChange={setDocumentation} pName="Documentation" pHolder={DefaultPackage.documentation}/>
+	    </Box>
+	    <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={dateCreated} pOnChange={setDateCreated} pName="Date Created" pHolder={DefaultPackage.dateCreated}/>
+              <TextInput pValue={datePublished} pOnChange={setDatePublished} pName="Date Published" pHolder={DefaultPackage.datePublished}/>
+	    </Box>
+	    <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={applicationCategory} pOnChange={setApplicationCategory} pName="Application Category" pHolder={DefaultPackage.applicationCategory}/>
+	      <MenuInput pValue={developmentStatus} pOnChange={setDevelopmentStatus} pName="Development Status" pOptions={DevStatuses} />
+              <ListInput pValue={keywords} pOnChange={setKeywords} pName="Keywords" pHolder={DefaultPackage.keywords}/>
+	    </Box>
+          </Paper>
+	  <Paper sx={{ p: 2, border: "3px solid", borderColor: "grey.300", borderRadius: 2, boxShadow: 3 }}>
+            <Typography>The current version</Typography>
+	    <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={version} pOnChange={setVersion} pName="Version" pHolder={DefaultPackage.version}/>
+	      <TextInput pValue={dateModified} pOnChange={setDateModified} pName="Date Modified" pHolder={DefaultPackage.dateModified}/>
+	    </Box>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+	      <TextInput pValue={releaseNotes} pOnChange={setReleaseNotes} pName="Release Notes" pHolder={DefaultPackage.releaseNotes}/>
+	      <TextInput pValue={downloadUrl} pOnChange={setDownloadUrl} pName="Download Url" pHolder={DefaultPackage.downloadUrl}/>
+	    </Box>
+	  </Paper>
+	  <Paper sx={{ p: 2, border: "3px solid", borderColor: "grey.300", borderRadius: 2, boxShadow: 3 }}>
+            <Typography>The environment</Typography>
+            <Box sx={{ display: "flex" }}>
+              <ListInput pValue={operatingSystem} pOnChange={setOperatingSystem} pName="Operating Systems" pHolder={DefaultPackage.operatingSystem}/>
+              <ListInput pValue={programmingLanguage} pOnChange={setProgrammingLanguage} pName="Programming Languages" pHolder={DefaultPackage.programmingLanguage}/>
+	    </Box>
+	  </Paper>
+	  <Paper sx={{ p: 2, border: "3px solid", borderColor: "grey.300", borderRadius: 2, boxShadow: 3 }}>
+            <Typography>The development tools</Typography>
+            <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={codeRepository} pOnChange={setCodeRepository} pName="Code Repository" pHolder={DefaultPackage.codeRepository}/>
+	      <TextInput pValue={contIntegration} pOnChange={setContIntegration} pName="Cont Integration" pHolder={DefaultPackage.contIntegration}/>
+	    </Box>
+            <Box sx={{ display: "flex" }}>
+ 	      <TextInput pValue={issueTracker} pOnChange={setIssueTracker} pName="Issue Tracker" pHolder={DefaultPackage.issueTracker}/>
+	      <TextInput pValue={discussion} pOnChange={setDiscussion} pName="Discussion" pHolder={DefaultPackage.discussion}/>
+	    </Box>
+            <Box sx={{ display: "flex" }}>
+	      <TextInput pValue={guixPackage} pOnChange={setGuixPackage} pName="Guix Package" pHolder={DefaultPackage.guixPackage}/>
+	      <TextInput pValue={spackPackage} pOnChange={setSpackPackage} pName="Spack Package" pHolder={DefaultPackage.spackPackage}/>
+	    </Box>
+	  </Paper>
         </Grid>
         <Grid xs={12} md={6}>
           <Render desc={desc} setPackage={setPackage}/>
