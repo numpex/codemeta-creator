@@ -1,0 +1,33 @@
+# This is a test job just for merge requests, since npm run build does run
+# 'npm lint' too.
+#test:
+#  image: node:18.17
+#  tags:
+#    - linux
+#  script:
+#    - npm install
+#    - npm run lint
+#  rules:
+#    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+  runs-on: image: node:18.17
+  steps:
+    - npm install
+    - npm run build
+    # Output build is actually in 'out'
+    - rm -rf public
+    - mv out public
+  artifacts:
+    paths:
+      - public
