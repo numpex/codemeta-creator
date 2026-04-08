@@ -7,7 +7,7 @@ export default function ListInput({ pValue, pOnChange, pName, pHolder }: {
   pValue : stringList,
   pOnChange: any,
   pName : string,
-  pHolder : string,
+  pHolder : stringList,
 }) {
   return (
     <Grid xs={12}>
