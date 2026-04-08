@@ -21,8 +21,12 @@ on:
 
 jobs:
   build:
-    runs-on: node:18.17
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
       - name: install
         run: npm install
       - name: build
@@ -32,6 +36,7 @@ jobs:
         run: rm -rf public ; mv out public
       - name: store
         uses: actions/upload-artifact@v4
-	with:
-	  name: public
-	  path: public
+        with:
+          name: public
+          path: public
+
