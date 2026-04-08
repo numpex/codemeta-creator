@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'export',
-    basePath: '',
+    basePath: 'codemeta-creator',
   modularizeImports: {
     '@mui/icons-material': {
       transform: '@mui/icons-material/{{member}}',
