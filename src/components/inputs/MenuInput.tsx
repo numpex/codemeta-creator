@@ -1,5 +1,5 @@
-import { TextField, MenuItem } from "@mui/material";
 import { ChangeEvent, stringList } from '@/lib/types';
+import { MenuItem, TextField } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
 export default function MenuInput({ pValue, pOnChange, pName, pOptions }: {

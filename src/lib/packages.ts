@@ -1,5 +1,5 @@
-import { DefaultLicense } from '@/lib/licenses';
 import { PackageDescription, stringList } from "@/lib/types";
+import { DefaultLicense } from '@/lib/licenses';
 
 export const EmptyPackage: PackageDescription = {
   name: '',

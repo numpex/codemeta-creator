@@ -1,12 +1,12 @@
 "use client";
 
 import { Box, Paper } from "@mui/material";
+import { DefaultPackage, DevStatuses } from '@/lib/packages';
 import { License, PackageDescription, stringList } from '@/lib/types';
 import { useCallback, useMemo, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { DefaultPackage, DevStatuses } from '@/lib/packages';
 import Grid from '@mui/material/Unstable_Grid2';
 import Help from '@/components/Help';
 import IconButton from '@mui/material/IconButton';
