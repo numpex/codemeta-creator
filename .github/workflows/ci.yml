@@ -21,7 +21,7 @@ on:
 
 jobs:
   build:
-  runs-on: image: node:18.17
+  runs-on: node:18.17
   steps:
     - npm install
     - npm run build
